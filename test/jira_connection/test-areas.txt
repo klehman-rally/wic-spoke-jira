@@ -1,0 +1,107 @@
+
+UPDATE
+
+$ update_issue_spec.rb:  it "should successfully update the issue summary" do (just the summary field, all others untouched)
+$ update_issue_spec.rb:  it "should successfully update the issue fields" do
+$ update_issue_spec.rb:  it "should successfully update the issue external id" do
+$ update_issue_spec.rb:  it "should raise exception when bad data for JIRA bug fields is supplied" do
+$ update_issue_spec.rb:  it "should raise exception when data for non-existent JIRA field is supplied" do
+
+-------------------------------------------------------------------------------------------------------------
+
+SPECAL CHARACTER HANDLING
+$ specialchars_spec.rb:  it "should pass the Create-JIRA-to-Rally when Summary includes special chars" do
+$ specialchars_spec.rb:  it "should pass the Create-JIRA-to-Rally when Description includes special chars" do
+$ specialchars_spec.rb:  it "should pass the Create-Rally-to-JIRA when Name includes special chars" do
+$ specialchars_spec.rb:  it "should pass the Create-Rally-to-JIRA when Description includes special chars" do
+$ specialchars_spec.rb:  it "should pass the Create-Rally-to-JIRA when Description includes HTML bold tag" do
+$ specialchars_spec.rb:  it "should pass the Create-Rally-to-JIRA when Description includes HTML bold/italic/underline tag" do
+$ specialchars_spec.rb:  it "should pass the Create-Rally-to-JIRA when Description includes URL link" do
+$ specialchars_spec.rb:  it "should pass the Create-Rally-to-JIRA when Description includes image link" do
+
+$ specialchars_spec.rb:  it "should pass the Update-JIRA-to-Rally when Summary includes special chars" do
+$ specialchars_spec.rb:  it "should pass the Update-JIRA-to-Rally when Description includes special chars" do
+$ specialchars_spec.rb:  it "should pass the Update-Rally-to-JIRA when Name includes special chars" do
+$ specialchars_spec.rb:  it "should pass the Update-Rally-to-JIRA when Description includes special chars" do
+$ specialchars_spec.rb:  it "should pass the Update-Rally-to-JIRA when Description includes HTML bold tag" do
+$ specialchars_spec.rb:  it "should pass the Update-Rally-to-JIRA when Description includes HTML bold/italic/underline tag" do
+$ specialchars_spec.rb:  it "should pass the Update-Rally-to-JIRA when Description includes URL link" do
+$ specialchars_spec.rb:  it "should pass the Update-Rally-to-JIRA when Description includes image link" do
+
+-------------------------------------------------------------------------------------------------------------
+
+FIND
+$ find_spec.rb:  it "should find an existing JIRA issue by id"
+$ find_spec.rb:  it "should find an existing JIRA issue by external system (Rally) id"
+$ find_spec.rb:  it "should raise exception on attempting to find a JIRA issue by id where no such id"
+$ find_spec.rb:  it "should result in Nil object when attempting to find a JIRA issue by Rally ID where no such Rally ID exists"
+$ find_spec.rb:  it "should find new defects" 
+$ find_spec.rb:  it "should find updates" 
+$ find_spec.rb:  it "should find new defects using a creation filter" 
+$ find_spec.rb:  it "should detect a bad creation filter"   aka misspelled field 'Prioriti = HIgh'
+$ find_spec.rb:  it "should raise error finding NEW     issues with bad external id field name" 
+$ find_spec.rb:  it "should raise error finding UPDATED issues with bad external id field name" 
+$ find_spec.rb:  it "Test Find Updates with future timestamp" 
+X find_spec.rb:  it "should Test Find New with None in Filter" 
+
+-------------------------------------------------------------------------------------------------------------
+
+User Mapping
+   tests largely addressed in field_handler *_user_*_handler_spec.rb tests
+-------------------------------------------------------------------------------------------------------------
+
+NEW STORY:  implement rich text descriptions 
+~ html_spec.rb:  it "should pass the Create-JIRA-to-Rally test with JIRA issues that have no {html}" do
+$ html_spec.rb:  it "should pass the Create-JIRA-to-Rally test with JIRA issues that do have {html}" do
+$ html_spec.rb:  it "should pass the Create-Rally-to-JIRA test with description that has HTML tags" do
+~ html_spec.rb:  it "should pass the Update-JIRA-to-Rally test with JIRA issues that have no {html}" do
+$ html_spec.rb:  it "should pass the Update-JIRA-to-Rally test with JIRA issues that do have {html}" do
+$ html_spec.rb:  it "should pass the Update-Rally-to-JIRA test with description that has HTML tags" do
+
+-------------------------------------------------------------------------------------------------------------
+
+NEW TEST:  in slow tests  ( these need to have Severity custom field defined in Jira )
+$ severity_spec.rb: it "should create an issue in JIRA with no severity and transfer to Rally resulting in None severity on Rally defect" do
+$ severity_spec.rb: it "should create an issue in Rally with no severity set and transfer to JIRA" do
+$ severity_spec.rb: it "should create an issue in Rally with severity Cosmetic and transfer to JIRA" do
+$ severity_spec.rb: it "should change the severity to a non-default value in Rally and update JIRA with the correct severity" do
+$ severity_spec.rb: it "should change the severity to None in Rally and update JIRA with the correct severity" do
+$ severity_spec.rb: it "should change the severity and status in Rally and update JIRA correctly" do
+$ severity_spec.rb: it "should change the severity to default None in Jira and update Rally with the None severity" do
+
+-------------------------------------------------------------------------------------------------------------
+
+CONNECTOR
+$ connector_spec.rb: Test basic copy of issue  in JIRA  to Rally defect
+$ connector_spec.rb: Test basic copy of defect in Rally to JIRA issue
+$ connector_spec.rb: Test update of JIRA  issue  from modifications detected in a  defect in Rally
+$                        update the status on source to end-state (Fixed)
+$                        check resolution on update target
+$ connector_spec.rb: Test update of Rally defect from modifications detected in an issue  in JIRA
+$                        update the status on source to end-state
+$                        check resolution on update target
+
+$ connector_spec.rb: it "should create a defect in Rally with no priority set and copy to a Jira bug (when no Priority mapped in config.xml)" do
+$ connector_spec.rb: it "should create a bug in Jira with no priority set and copy to a Rally defect (when no Priority mapped in config.xml)" do
+#      the above two tests disable the Priority mapping in the config.xml
+#        Jira then sets the Priority to the default value (3 -> Major) when you don't provide a priority in the creation
+#        Rally will have the priority as 'None'
+
+-------------------------------------------------------------------------------------------------------------
+
+LOAD
+$ load_spec.rb:  it "should pass Create-JIRA-to-Rally for #{NUM_TIMES} Defects" do
+$ load_spec.rb:  it "should pass Update-JIRA-to-Rally for #{NUM_TIMES} Defects" do
+$ load_spec.rb:  it "should pass Create-Rally-to-JIRA for #{NUM_TIMES} Defects" do
+$ load_spec.rb:  it "should pass Update-Rally-to-JIRA for #{NUM_TIMES} Defects" do    
+
+-------------------------------------------------------------------------------------------------------------
+
+
+Jira Resolutions        Rally Resolutions
+-----------------       ------------------
+Fixed
+Won't Fix
+Duplicate
+Incomplete
+Cannot Reproduce

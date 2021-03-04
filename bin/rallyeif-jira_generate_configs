@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+# Copyright 2001-2018 CA Technologies. All Rights Reserved.
+
+require 'fileutils'
+require 'pathname'
+
+path = File.dirname(__FILE__)
+config_path = File.join(path, '..', 'configs', '*')
+config_path = File.expand_path(config_path)
+
+if Dir.exists?("configs")
+  puts "configs directory exists, aborting..."
+  puts "Please re-run after renaming or removing the configs directory."
+  exit 1
+end
+
+Dir.mkdir("configs")
+
+Dir[config_path].each do |file_name|
+  base_name = Pathname.new(file_name).basename
+  FileUtils::copy(file_name, File.join("configs", base_name))
+end
+
+puts "Successfully generated configurations for rallyeif-jira in configs directory."
